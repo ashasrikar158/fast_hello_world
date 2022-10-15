@@ -19,7 +19,8 @@ jobs:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run:
-        docker login -u AWS -p 
+        docker login -u AWS -p $(aws ecr get-login-password --region the-region-you-are-in) xxxxxxxxx.dkr.ecr.the-region-you-are-in.amazonaws.com
+
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image       
       run: docker build . --file Dockerfile --tag srikar158/fastapi_ineuron:$(date +%s)
